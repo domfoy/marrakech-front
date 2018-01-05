@@ -1,5 +1,5 @@
 export const validateGameAction = () => ({
-  type: 'GAME-VALIDATE_ACTION',
+  type: 'PLAYER-VALIDATE_ACTION',
   meta: {
     remote: true
   },

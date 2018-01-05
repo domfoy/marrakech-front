@@ -2,8 +2,6 @@ import _ from 'lodash';
 
 import {combineReducers} from 'redux';
 
-import assam from '../assam/reducers';
-
 const currentTurn = (
   state = 0,
   action
@@ -15,19 +13,6 @@ const currentTurn = (
       return state;
   }
 };
-
-function standardOverlay(partialCells) {
-  const alreadyInCellIds = _.map(partialCells, 'id');
-
-  const toAddCellIds = _.difference(_.times(49), alreadyInCellIds);
-
-  const toAddCells = _.map(toAddCellIds, id => ({
-    id,
-    colour: 'N'
-  }));
-
-  return [...partialCells, ...toAddCells];
-}
 
 const cells = (
   state = [],
@@ -46,7 +31,5 @@ const cells = (
 };
 
 export default combineReducers({
-  currentTurn,
-  assam,
-  cells
+  currentTurn
 });
