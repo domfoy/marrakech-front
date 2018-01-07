@@ -25,6 +25,7 @@
     "linebreak-style": "off",
     "global-require": "off",
     "arrow-body-style": "off",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "no-unused-vars": 1,
     "no-use-before-define": 0,
     "no-constant-condition": 0

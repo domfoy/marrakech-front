@@ -3,7 +3,8 @@ import createSagaMiddleware from 'redux-saga';
 
 import app from './reducers';
 import initialState from './initial-state';
-import saga from '../../middlewares/saga';
+import saga from '../../middlewares/sagas';
+import createSocket from '../../socket';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,6 +14,6 @@ const store = createStore(
   applyMiddleware(sagaMiddleware)
 );
 
-sagaMiddleware.run(saga);
+sagaMiddleware.run(saga(createSocket));
 
 export default store;

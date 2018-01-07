@@ -5,8 +5,9 @@
     "react",
     "react-boilerplate"
   ],
-
   "plugins": [
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
+    "espower",
+    "transform-runtime"
   ]
 }
