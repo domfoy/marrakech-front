@@ -8,7 +8,7 @@
   "scripts": {
     "webpack": "webpack",
     "srv": "./node_modules/.bin/json-server --watch fake-api/db.json",
-    "webpack-dev-server": "webpack-dev-server",
+    "webpack-dev-server": "./node_modules/.bin/webpack-dev-server",
     "prod": "npm run webpack -- --env.mode production",
     "prod:analyze": "npm run prod -- --env.presets analyze",
     "prod:compress": "npm run prod -- --env.presets compress",

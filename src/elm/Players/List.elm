@@ -1,12 +1,32 @@
 module Players.List exposing (list, nav, view)
 
 import Html exposing (..)
+import Models exposing (Player)
+import Msgs exposing (Msg)
+import RemoteData exposing (WebData)
+
 
 view players =
     div []
         [ nav
-        , list players
+        , maybeList players
         ]
+
+
+maybeList : WebData (List Player) -> Html Msg
+maybeList response =
+    case response of
+        RemoteData.NotAsked ->
+            text ""
+
+        RemoteData.Loading ->
+            text "Loading"
+
+        RemoteData.Success players ->
+            list players
+
+        RemoteData.Failure error ->
+            text (Debug.toString error)
 
 
 nav =
@@ -33,7 +53,7 @@ list players =
 playerRow player =
     tr []
         [ td [] [ text player.id ]
-        , td [] [ text player.name]
-        , td [] [ text (String.fromInt player.level)]
+        , td [] [ text player.name ]
+        , td [] [ text (String.fromInt player.level) ]
         , td [] []
         ]

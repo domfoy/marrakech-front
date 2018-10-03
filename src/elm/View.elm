@@ -1,14 +1,13 @@
-module View exposing (..)
+module View exposing (view)
 
-import Html exposing (Html, div ,text)
-import Players.List
+import Html exposing (Html, div, text)
+import Models exposing (Model, Player)
 import Msgs exposing (Msg)
-import Models exposing (Model)
+import Players.List
+import RemoteData exposing (WebData)
 
-view : (Model, Cmd Msg) -> Html Msg
-view (model, _) =
-  div []
-    [ page model ]
 
-page model =
-  Players.List.view model.players
+view : Model -> Html Msg
+view model =
+    div []
+        [ Players.List.view model.players ]
