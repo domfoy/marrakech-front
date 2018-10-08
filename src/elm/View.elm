@@ -11,3 +11,6 @@ view : Model -> Html Msg
 view model =
     div []
         [ Players.List.view model.players ]
+        div
+        []
+        []

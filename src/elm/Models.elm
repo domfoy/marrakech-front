@@ -5,6 +5,10 @@ import RemoteData exposing (WebData)
 
 type alias Model =
     { players : WebData (List Player)
+    , turn : Int
+    , playerTurn : PlayerTurn
+    , assamPosition : Position
+    , assamDirection : Direction
     }
 
 
@@ -22,3 +26,19 @@ type alias Player =
     , name : String
     , level : Int
     }
+
+
+type PlayerTurn
+    = OrientAssam
+    | LayRug
+
+
+type alias Position =
+    ( Int, Int )
+
+
+type Direction
+    = Right
+    | Up
+    | Left
+    | Down
