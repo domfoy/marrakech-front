@@ -2,6 +2,7 @@ module Main exposing (init, main)
 
 import Browser
 import Commands exposing (fetchPlayers)
+import Html.Styled
 import Models exposing (Model, initialModel)
 import Msgs exposing (Msg)
 import Update exposing (update)

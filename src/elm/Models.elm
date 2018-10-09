@@ -1,4 +1,4 @@
-module Models exposing (Model, Player, PlayerId, initialModel)
+module Models exposing (Direction(..), Model, Orientation(..), Player, PlayerId, initialModel)
 
 import RemoteData exposing (WebData)
 
@@ -14,7 +14,12 @@ type alias Model =
 
 initialModel : Model
 initialModel =
-    { players = RemoteData.Loading }
+    { players = RemoteData.Loading
+    , turn = 0
+    , playerTurn = OrientAssam
+    , assamPosition = ( 0, 0 )
+    , assamDirection = Up
+    }
 
 
 type alias PlayerId =
@@ -42,3 +47,8 @@ type Direction
     | Up
     | Left
     | Down
+
+
+type Orientation
+    = L
+    | R
