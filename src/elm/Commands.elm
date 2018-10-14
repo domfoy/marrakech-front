@@ -8,6 +8,13 @@ import Msgs
 import RemoteData
 
 
+
+-- postAction =
+--     Http.post actionUrl Http.jsonBody playersDecoder
+--         |> RemoteData.sendRequest
+--         |> Cmd.map Msgs.OnFetchPlayers
+
+
 fetchPlayers =
     Http.get fetchPlayersUrl playersDecoder
         |> RemoteData.sendRequest
@@ -16,6 +23,10 @@ fetchPlayers =
 
 fetchPlayersUrl =
     "http://localhost:3000/players"
+
+
+actionUrl =
+    "http://localhost:3000/action"
 
 
 playersDecoder =
