@@ -35,6 +35,6 @@ playersDecoder =
 
 playerDecoder =
     Decode.succeed Player
-        |> required "id" Decode.string
+        |> required "id" Decode.int
         |> required "name" Decode.string
         |> required "level" Decode.int

@@ -52,7 +52,7 @@ list players =
 
 playerRow player =
     tr []
-        [ td [] [ text player.id ]
+        [ td [] [ text (String.fromInt player.id) ]
         , td [] [ text player.name ]
         , td [] [ text (String.fromInt player.level) ]
         , td [] []

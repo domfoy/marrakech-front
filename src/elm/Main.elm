@@ -17,10 +17,13 @@ init _ =
 
 
 subscriptions _ =
-    newGame (decodeGameInfo >> Msgs.NewGame)
+    Sub.batch [ newGame (decodeGameInfo >> Msgs.NewGame), pendingAction (decodePendingAction >> Msgs.NewPendingAction) ]
 
 
 port newGame : (Decode.Value -> msg) -> Sub msg
+
+
+port pendingAction : (Decode.Value -> msg) -> Sub msg
 
 
 decodeGameInfo : Decode.Value -> Result Decode.Error Models.GameInfo
@@ -34,6 +37,10 @@ gameInfoDecoder =
         |> PipelineDecoder.required "currentTurn" Decode.int
         |> PipelineDecoder.required "playerCount" Decode.int
         |> PipelineDecoder.required "totalTurns" Decode.int
+
+
+decodePendingAction =
+    Decode.succeed Models.PendingActionContext
 
 
 

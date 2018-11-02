@@ -1,6 +1,7 @@
 port module Update exposing (update)
 
-import Models exposing (Direction(..), Model, Orientation(..))
+import Json.Encode as Encode
+import Models exposing (ActionPayload(..), Direction(..), Model, Orientation(..), encodeActionPayload)
 import Msgs exposing (Msg)
 
 
@@ -22,8 +23,21 @@ update msg model =
         Msgs.OrientAssam orientation ->
             ( { model | assamDirection = orientAssam orientation model.assamDirection }, Cmd.none )
 
+        Msgs.SubmitAction ->
+            let
+                currentAction =
+                    model.currentAction
+
+                newCurrentAction =
+                    { currentAction | payload = OrientAssamPayload model.assamDirection }
+            in
+            ( { model | currentAction = newCurrentAction }, submitAction (encodeActionPayload model.currentAction.payload) )
+
 
 port createSocket : () -> Cmd msg
+
+
+port submitAction : Encode.Value -> Cmd msg
 
 
 orientAssam : Orientation -> Direction -> Direction

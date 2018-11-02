@@ -10,3 +10,4 @@ type Msg
     | OrientAssam Orientation
     | StartGame
     | NewGame (Result Decode.Error Models.GameInfo)
+    | SubmitAction
