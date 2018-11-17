@@ -1,4 +1,4 @@
-module Models exposing (ActionPayload(..), Direction(..), GameInfo, Model, Orientation(..), Player, PlayerId, encodeActionPayload, initialModel)
+module Models exposing (ActionMeta, ActionPayload(..), ActionType(..), Colour(..), Direction(..), GameInfo, Model, Orientation(..), PendingActionContext, Player, PlayerId, encodeActionPayload, initialModel)
 
 import Array
 import Json.Encode as Encode
@@ -18,7 +18,7 @@ initialModel : Model
 initialModel =
     { players = RemoteData.Loading
     , assamPosition = ( 0, 0 )
-    , currentAction = { meta = { turn = 1, playerId = 1, actionType = OrientAssam }, payload = OrientAssamPayload Up }
+    , currentAction = { meta = { turn = 1, playerId = 1, actionType = OrientAssam, colour = Blue }, payload = OrientAssamPayload Up }
     , assamDirection = Up
     , game = GameInfo 0 0 0
     }

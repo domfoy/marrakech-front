@@ -17,7 +17,10 @@ init _ =
 
 
 subscriptions _ =
-    Sub.batch [ newGame (decodeGameInfo >> Msgs.NewGame), pendingAction (decodePendingAction >> Msgs.NewPendingAction) ]
+    Sub.batch
+        [ newGame (decodeGameInfo >> Msgs.NewGame)
+        , pendingAction (decodePendingAction >> Msgs.NewPendingAction)
+        ]
 
 
 port newGame : (Decode.Value -> msg) -> Sub msg
@@ -40,7 +43,56 @@ gameInfoDecoder =
 
 
 decodePendingAction =
+    Decode.decodeValue pendingActionDecoder
+
+
+pendingActionDecoder =
     Decode.succeed Models.PendingActionContext
+        |> PipelineDecoder.required "pendingAction"
+            (Decode.succeed Models.ActionMeta
+                |> PipelineDecoder.required "turn" Decode.int
+                |> PipelineDecoder.required "playerId" Decode.int
+                |> PipelineDecoder.required "actionType" actionTypeDecoder
+                |> PipelineDecoder.required "colour" colourDecoder
+            )
+
+
+actionTypeDecoder =
+    Decode.string
+        |> Decode.andThen
+            (\str ->
+                case str of
+                    "ORIENT_ASSAM" ->
+                        Decode.succeed Models.OrientAssam
+
+                    "LAY_RUG" ->
+                        Decode.succeed Models.LayRug
+
+                    unmatched ->
+                        Decode.fail <| "Unknown theme: " ++ unmatched
+            )
+
+
+colourDecoder =
+    Decode.string
+        |> Decode.andThen
+            (\str ->
+                case str of
+                    "BLUE" ->
+                        Decode.succeed Models.Blue
+
+                    "YELLOW" ->
+                        Decode.succeed Models.Yellow
+
+                    "RED" ->
+                        Decode.succeed Models.Red
+
+                    "BROWN" ->
+                        Decode.succeed Models.Brown
+
+                    unmatched ->
+                        Decode.fail <| "Unknown theme: " ++ unmatched
+            )
 
 
 

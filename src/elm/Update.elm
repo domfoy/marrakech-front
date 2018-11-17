@@ -33,6 +33,19 @@ update msg model =
             in
             ( { model | currentAction = newCurrentAction }, submitAction (encodeActionPayload model.currentAction.payload) )
 
+        Msgs.NewPendingAction (Ok pendingActionContext) ->
+            let
+                currentAction =
+                    model.currentAction
+
+                newCurrentAction =
+                    { currentAction | meta = pendingActionContext.pendingAction }
+            in
+            ( { model | currentAction = newCurrentAction }, Cmd.none )
+
+        Msgs.NewPendingAction (Err err) ->
+            ( model, Cmd.none )
+
 
 port createSocket : () -> Cmd msg
 

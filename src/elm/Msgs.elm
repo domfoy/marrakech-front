@@ -11,3 +11,4 @@ type Msg
     | StartGame
     | NewGame (Result Decode.Error Models.GameInfo)
     | SubmitAction
+    | NewPendingAction (Result Decode.Error Models.PendingActionContext)
